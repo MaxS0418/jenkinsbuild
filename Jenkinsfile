@@ -126,3 +126,4 @@ pipeline {
             echo "Pipeline finished."
         }
     }
+}
