@@ -4,6 +4,7 @@ pipeline {
     environment {
         MODEL_URL = ""
         DOWNLOAD_DIR = ""
+        S3_File_Name = ""
         
     }
     stages {
@@ -38,12 +39,18 @@ pipeline {
                                 defaultValue: '', 
                                 description: 'Enter the directory location you want to save the model'
                             )
+                            string(
+                                name: 'S3_File_Name', 
+                                defaultValue: '', 
+                                description: 'Enter the file you want to save the output in S3'
+                            )
                         ]
                     )
                     
                     // Save the user input values into the variables
                     MODEL_URL = userInputs['MODEL_URL']
                     DOWNLOAD_DIR = userInputs['DOWNLOAD_DIR']
+                    S3_File_Name = userInputs['S3_File_Name']
                     
                     // Output the entered values
                     echo "User entered Model URL: ${MODEL_URL}"
@@ -125,8 +132,8 @@ pipeline {
                     s3Upload (
                         acl: 'Private' , 
                         bucket: 'jenkinsoutput041891' ,
-                        file: "${DOWNLOAD_DIR}/scan_report.txt",
-                        path: "scan_report.txt"
+                        file: "${DOWNLOAD_DIR}",
+                        path: "${S3_File_Name}"
                     )
                 }
             }
