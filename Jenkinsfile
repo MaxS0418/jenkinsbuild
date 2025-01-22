@@ -8,21 +8,7 @@ pipeline {
         
     }
     stages {
-        stage('Setup') {
-            steps {
-                script {
-                    // Ensure Python and necessary packages are available
-                    sh """
-                    python3 -m venv venv
-                    source venv/bin/activate
-                    pip install --upgrade pip
-                    pip install picklescan
-                    """
-                }
-            }
-        }
-        
-         stage('User Input') {
+        stage('User Input') {
             steps {
                 script {
                     // Ask the user to input values for the variables
@@ -60,11 +46,15 @@ pipeline {
             }
         }
         
-        /*stage('Prepare Environment') {
+        stage('Setup') {
             steps {
                 script {
-                    // Ensure the destination directory exists
+                    // Ensure Python and necessary packages are available
                     sh """
+                    python3 -m venv venv
+                    source venv/bin/activate
+                    pip install --upgrade pip
+                    pip install picklescan
                     mkdir -p ${DOWNLOAD_DIR}
                     """
                 }
@@ -138,7 +128,18 @@ pipeline {
                     )
                 }
             }
-        }*/
+        }
+        
+        stage('Cleanup local') {
+            steps {
+               script {
+                    // Check if PickleScan generated a report and verify the results
+                    sh """
+                    rm -r ${DOWNLOAD_DIR}
+                    """
+                }
+            }
+        }
     }
 
     post {
