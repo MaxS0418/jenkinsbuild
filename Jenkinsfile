@@ -118,16 +118,13 @@ pipeline {
                 }
             }
         }
-        stages {
         stage('Upload to S3') {
             steps {
                 script {
                     sh 'aws s3 cp ${DOWNLOAD_DIR}/scan_report.txt s3://jenkinsoutput041891/'
                 }
             }
-        }
-    }
-        
+        } 
     }
 
     post {
