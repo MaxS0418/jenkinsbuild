@@ -5,8 +5,8 @@ pipeline {
         MODEL_URL = ""
         DOWNLOAD_DIR = ""
         AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
-        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
         AWS_DEFAULT_REGION = 'us-east-2'  // Update with your region
+        AWS_BUCKET_NAME = 'jenkinsoutput041891'
     }
     stages {
         stage('Setup') {
@@ -124,12 +124,26 @@ pipeline {
         stage('Upload to S3') {
             steps {
                 script {
-                    sh """
-                    aws s3 cp ${DOWNLOAD_DIR} s3://jenkinsoutput041891/${DOWNLOAD_DIR} --recursive
-                    """
+                    // Upload directory to S3 using the S3 Publisher plugin
+                    def s3Publisher = step([
+                        $class: 'S3BucketPublisher',
+                        entries: [
+                            [
+                                file: "${DOWNLOAD_DIR}",
+                                target: "",
+                                flatten: false,
+                                excludePathPattern: ""
+                            ]
+                        ],
+                        profileName: "${env.AWS_CREDENTIALS_ID}",
+                        bucket: "${env.AWS_BUCKET_NAME}",
+                        region: "${env.AWS_DEFAULT_REGION}",
+                        noUploadOnFailure: true
+                    ])
+                    s3Publisher.publish()
                 }
             }
-        } 
+        }
     }
 
     post {
