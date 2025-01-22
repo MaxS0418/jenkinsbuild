@@ -124,8 +124,9 @@ pipeline {
                 withAWS(credentials: 'jenkinss3access', region: 'us-east-2'){
                     s3Upload (
                         acl: 'Private' , 
-                        bucket: 'jenkinsoutput041891' , 
-                        path: "${DOWNLOAD_DIR}/scan_report.txt"
+                        bucket: 'jenkinsoutput041891' ,
+                        file: "${DOWNLOAD_DIR}/scan_report.txt",
+                        path: "scan_report.txt"
                     )
                 }
             }
