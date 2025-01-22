@@ -121,7 +121,9 @@ pipeline {
         stage('Upload to S3') {
             steps {
                 script {
+                    sh """
                     aws s3 cp ${DOWNLOAD_DIR} s3://jenkinsoutput041891/${DOWNLOAD_DIR}
+                    """
                 }
             }
         } 
