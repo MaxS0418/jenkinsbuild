@@ -127,10 +127,16 @@ pipeline {
                         path: "${S3_FILE_NAME}"
                     )
                 }
+                script {
+                    // Check if PickleScan generated a report and verify the results
+                    sh """
+                    rm -r ${DOWNLOAD_DIR}
+                    """
+                }
             }
         }
         
-        stage('Cleanup local') {
+        /*stage('Cleanup local') {
             steps {
                script {
                     // Check if PickleScan generated a report and verify the results
@@ -139,7 +145,7 @@ pipeline {
                     """
                 }
             }
-        }
+        }*/
     }
 
     post {
