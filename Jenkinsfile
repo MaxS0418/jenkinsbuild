@@ -55,11 +55,12 @@ pipeline {
                     // Output the entered values
                     echo "User entered Model URL: ${MODEL_URL}"
                     echo "User entered Directory: ${DOWNLOAD_DIR}"
+                    echo "User entered Directory: ${S3_FILE_NAME}"
                 }
             }
         }
         
-        stage('Prepare Environment') {
+        /*stage('Prepare Environment') {
             steps {
                 script {
                     // Ensure the destination directory exists
@@ -137,7 +138,7 @@ pipeline {
                     )
                 }
             }
-        }
+        }*/
     }
 
     post {
