@@ -125,7 +125,7 @@ pipeline {
                     s3Upload (
                         acl: 'Private' , 
                         bucket: 'jenkinsoutput041891' , 
-                        path: "${DOWNLOAD_DIR}"
+                        path: "${DOWNLOAD_DIR}/scan_report.txt"
                     )
                 }
             }
