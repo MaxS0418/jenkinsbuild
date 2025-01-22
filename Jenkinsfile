@@ -125,7 +125,7 @@ pipeline {
                     s3Upload (
                         acl: 'Private' , 
                         bucket: 'jenkinsoutput041891' , 
-                        includePath: ${DOWNLOAD_DIR}
+                        includePath: ${DOWNLOAD_DIR},
                         flatten: false
                     )
                 }
