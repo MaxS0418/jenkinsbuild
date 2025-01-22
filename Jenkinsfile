@@ -4,9 +4,9 @@ pipeline {
     environment {
         MODEL_URL = ""
         DOWNLOAD_DIR = ""
-        //AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
-        //AWS_DEFAULT_REGION = 'us-east-2'  // Update with your region
-        //AWS_BUCKET_NAME = 'jenkinsoutput041891'
+        AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
+        AWS_DEFAULT_REGION = 'us-east-2'  // Update with your region
+        AWS_BUCKET_NAME = 'jenkinsoutput041891'
     }
     stages {
         stage('Setup') {
@@ -121,7 +121,7 @@ pipeline {
                 }
             }
         }
-        /*stage('Upload to S3') {
+        stage('Upload to S3') {
             steps {
                 script {
                     // Upload directory to S3 using the S3 Publisher plugin
@@ -143,7 +143,7 @@ pipeline {
                     s3Publisher.publish()
                 }
             }
-        }*/
+        }
     }
 
     post {
