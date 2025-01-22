@@ -4,7 +4,7 @@ pipeline {
     environment {
         MODEL_URL = ""
         DOWNLOAD_DIR = ""
-        S3_File_Name = ""
+        S3_FILE_NAME = ""
         
     }
     stages {
@@ -38,7 +38,7 @@ pipeline {
                                 name: 'DOWNLOAD_DIR', 
                                 defaultValue: '', 
                                 description: 'Enter the directory location you want to save the model'
-                            )
+                            ),
                             string(
                                 name: 'S3_File_Name', 
                                 defaultValue: '', 
@@ -50,7 +50,7 @@ pipeline {
                     // Save the user input values into the variables
                     MODEL_URL = userInputs['MODEL_URL']
                     DOWNLOAD_DIR = userInputs['DOWNLOAD_DIR']
-                    S3_File_Name = userInputs['S3_File_Name']
+                    S3_FILE_NAME = userInputs['S3_FILE_NAME']
                     
                     // Output the entered values
                     echo "User entered Model URL: ${MODEL_URL}"
@@ -133,7 +133,7 @@ pipeline {
                         acl: 'Private' , 
                         bucket: 'jenkinsoutput041891' ,
                         file: "${DOWNLOAD_DIR}",
-                        path: "${S3_File_Name}"
+                        path: "${S3_FILE_NAME}"
                     )
                 }
             }
