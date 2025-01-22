@@ -40,7 +40,7 @@ pipeline {
                                 description: 'Enter the directory location you want to save the model'
                             ),
                             string(
-                                name: 'S3_File_Name', 
+                                name: 'S3_FILE_NAME', 
                                 defaultValue: '', 
                                 description: 'Enter the file you want to save the output in S3'
                             )
