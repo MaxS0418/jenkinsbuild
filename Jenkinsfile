@@ -121,7 +121,7 @@ pipeline {
         stage('Upload to S3') {
             steps {
                 script {
-                    sh 'aws s3 cp ${DOWNLOAD_DIR}/scan_report.txt s3://jenkinsoutput041891/'
+                    sh 'aws s3 cp scan_report.txt s3://jenkinsoutput041891/'
                 }
             }
         } 
